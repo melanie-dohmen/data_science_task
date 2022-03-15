@@ -85,24 +85,42 @@ if __name__=="__main__":
     '''
     test the fine-tuned CNN:
     '''
-    #eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
-    #plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
-    #plot_evaluation_results(eval_dict_pp_ftNN, "Evaluation of ft-CNN model after pp")
-
+    # call test routine for CNN model
+    # evaluation metrics are returned as dictionaries
+    eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
+    
+    # plot evaluation metrics for unprocessed predictions:
+    plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
+    
+    # plot evaluation metrics after post-processing predictions:
+    plot_evaluation_results(eval_dict_pp_ftNN, "Evaluation of ft-CNN model after pp")
+    
+    
     '''
     train and test a new CNN model:
     '''
-    train(CNN_train_params)
-    CNN_test_params["model_name"] = CNN_train_params["experiment_name"]
-    eval_dict_NN, eval_dict_pp_NN = test(CNN_test_params)
-    plot_evaluation_results(eval_dict_NN, "Evaluation of newly trained CNN model")
-    plot_evaluation_results(eval_dict_pp_NN, "Evaluation of newly trained CNN model after pp")
+    # # call train routine for CNN model (see parameters)
+    # train(CNN_train_params)
+    
+    # # get model name:
+    # CNN_test_params["model_name"] = CNN_train_params["experiment_name"]
+    
+    # # run test routine:
+    # eval_dict_NN, eval_dict_pp_NN = test(CNN_test_params)
+    
+    # # plot results with and without post-processing:
+    # plot_evaluation_results(eval_dict_NN, "Evaluation of newly trained CNN model")
+    # plot_evaluation_results(eval_dict_pp_NN, "Evaluation of newly trained CNN model after pp")
+    
     
     '''
     train and evaluate a random forest classifier
     '''   
-    #eval_dict_rfc, eval_dict_pp_rfc = train_and_test(rfc_params)
-    #plot_evaluation_results(eval_dict_rfc, "Evaluation of RFC Model")
-    #plot_evaluation_results(eval_dict_pp_rfc, "Evaluation of RFC Model after pp")
+    # # call train and test routine for random forest classifier 
+    # eval_dict_rfc, eval_dict_pp_rfc = train_and_test(rfc_params)
+ 
+    # # plot results with and without post-processing:
+    # plot_evaluation_results(eval_dict_rfc, "Evaluation of RFC Model")
+    # plot_evaluation_results(eval_dict_pp_rfc, "Evaluation of RFC Model after pp")
           
     
