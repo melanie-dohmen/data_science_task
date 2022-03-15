@@ -208,7 +208,7 @@ def train_and_test(params):
             prediction = predicted_mask_data[subset][image_nr]
                         
             # make binary:
-            prediction = (prediction>0.5).astype(np.uint8)
+            prediction = (prediction>0.5).astype(np.uint8)*255
             
             # save prediction images
             pred_PIL = Image.fromarray(prediction)

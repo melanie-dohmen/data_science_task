@@ -24,7 +24,7 @@ from scipy.ndimage.morphology import binary_fill_holes
 
 def separate_touching_nuclei(mask):
     # minimum distance between two watershed seed
-    region_width = 8
+    region_width = 15
 
     distance = distance_transform_edt(mask)
     coords = feature.peak_local_max(distance, min_distance=region_width, footprint=np.ones((3, 3)))

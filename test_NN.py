@@ -16,6 +16,8 @@ import numpy as np
 from postprocessing import separate_touching_nuclei, fill_holes, filter_by_size
 from evaluate import new_evaluation_dictionary, append_evaluation,insert_space_in_evaluation
 
+from plot_figures import plot_losses
+
 # export predictions
 from PIL import Image
 
@@ -89,6 +91,8 @@ def test(params):
                         params["checkpoint"]+"_"+params["model_name"]+".pytorch"),
                         map_location=device)
         
+    plot_losses(params["model_name"]) 
+
 
     model.eval()
     
@@ -137,7 +141,7 @@ def test(params):
                 # loop over samples of one batch:
                 for s in range(tissue_image.shape[0]):
                     prediction = np.zeros((params["patch_size"], params["patch_size"]), dtype = np.uint8)
-                    prediction[output[s,0,:,:]>0.5] = 1
+                    prediction[output[s,0,:,:]>0.5] = 255
                     
                     # save prediction images
                     pred_PIL = Image.fromarray(prediction)

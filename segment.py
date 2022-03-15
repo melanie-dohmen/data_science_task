@@ -67,13 +67,13 @@ rfc_params = {
     "sampling_factor": 0.01,
     "data_path": "data",
     "test_split_idx": 0,
-    "validation_split_idx": 0,
+    "validation_split_idx": 1,
     "seed": 42,
     "norm_stain": True,
-    "include_hessian_1": False,
-    "include_DoG_1": False,
-    "include_hessian_2": False,
-    "include_DoG_2": False,
+    "include_hessian_1": True,
+    "include_DoG_1": True,
+    "include_hessian_2": True,
+    "include_DoG_2": True,
     
     "separate_touching_nuclei": True,
     "fill_holes": True,
@@ -85,32 +85,32 @@ if __name__=="__main__":
     '''
     test the fine-tuned CNN:
     '''
-    # # call test routine for CNN model
-    # # evaluation metrics are returned as dictionaries
-    # eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
+    # call test routine for CNN model
+    # evaluation metrics are returned as dictionaries
+    eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
     
-    # # plot evaluation metrics for unprocessed predictions:
-    # plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
+    # plot evaluation metrics for unprocessed predictions:
+    plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
     
-    # # plot evaluation metrics after post-processing predictions:
-    # plot_evaluation_results(eval_dict_pp_ftNN, "Evaluation of ft-CNN model after pp")
+    # plot evaluation metrics after post-processing predictions:
+    plot_evaluation_results(eval_dict_pp_ftNN, "Evaluation of ft-CNN model after pp")
     
     
     '''
     train and test a new CNN model:
     '''
-    # call train routine for CNN model (see parameters)
-    train(CNN_train_params)
+    # # call train routine for CNN model (see parameters)
+    # train(CNN_train_params)
     
-    # get model name:
-    CNN_test_params["model_name"] = CNN_train_params["experiment_name"]
+    # # get model name:
+    # CNN_test_params["model_name"] = CNN_train_params["experiment_name"]
     
-    # run test routine:
-    eval_dict_NN, eval_dict_pp_NN = test(CNN_test_params)
+    # # run test routine:
+    # eval_dict_NN, eval_dict_pp_NN = test(CNN_test_params)
     
-    # plot results with and without post-processing:
-    plot_evaluation_results(eval_dict_NN, "Evaluation of newly trained CNN model")
-    plot_evaluation_results(eval_dict_pp_NN, "Evaluation of newly trained CNN model after pp")
+    # # plot results with and without post-processing:
+    # plot_evaluation_results(eval_dict_NN, "Evaluation of newly trained CNN model")
+    # plot_evaluation_results(eval_dict_pp_NN, "Evaluation of newly trained CNN model after pp")
     
     
     '''
@@ -120,7 +120,7 @@ if __name__=="__main__":
     # eval_dict_rfc, eval_dict_pp_rfc = train_and_test(rfc_params)
  
     # # plot results with and without post-processing:
-    # plot_evaluation_results(eval_dict_rfc, "Evaluation of RFC Model")
-    # plot_evaluation_results(eval_dict_pp_rfc, "Evaluation of RFC Model after pp")
+    # plot_evaluation_results(eval_dict_rfc, "Evaluation of RFC Model with All Features")
+    # plot_evaluation_results(eval_dict_pp_rfc, "Evaluation of RFC Model with All Features after pp")
           
     

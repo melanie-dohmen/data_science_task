@@ -17,7 +17,7 @@ from skimage import measure
 
 
 from norm_stain import normalizeStaining_Macenko
-from data_utils import load_data, add_hessian, add_DoG
+from data_utils import load_data, add_hessian, add_DoG, get_filename_prefixes
 
 from postprocessing import separate_touching_nuclei
 from evaluate import count_instances
@@ -227,7 +227,18 @@ def show_stain_normalization(tissue_data):
 
 
 
+def create_gt_pp():
 
+    path = os.path.join("data", "mask binary")
+    os.makedirs(os.path.join("data", "mask_binary_pp"), exist_ok=True)
+    mask_data = load_data(path)
+
+    n = mask_data.shape[0]
+    filename_prefixes = get_filename_prefixes(path)
+    for i in range(n):
+        mask_pp = separate_touching_nuclei(mask_data[i])
+        mask_pp_PIL = Image.fromarray(mask_pp.astype(np.uint8))
+        mask_pp_PIL.save(os.path.join("data", "mask_binary_pp",filename_prefixes[i]+"_pp.png" ))
 
 def compare_nuclei_counts_after_refine(tissue_data, mask_data):
 
@@ -367,25 +378,27 @@ def plot_evaluation_results(eval_dict, title, filename_indices = None):
             plt.plot(range(len(eval_dict[key])), eval_dict[key], label=key)
 
         
-    plt.legend()
+    plt.legend(loc='upper left')
     plt.title(title)
     if filename_indices is None:
         xticklabels = range(len(eval_dict["Accuracy"]))
         xticklocations = range(len(eval_dict["Accuracy"]))
-        if np.nan in eval_dict["Accuracy"]:
-            xticklocations = [xticklocations[x] for x in range(len(eval_dict["Accuracy"])) if np.isnan(eval_dict["Accuracy"][x])]
+        nan_xticklocations = [xticklocations[x] for x in range(len(eval_dict["Accuracy"])) if np.isnan(eval_dict["Accuracy"][x])]
+        if len(nan_xticklocations) == 3:  
+            xticklocations = nan_xticklocations
             xticklabels = ["" for x in xticklocations]
-            plt.text(0.5 *xticklocations[0], -0.05, "train")
-            plt.text(xticklocations[0]+0.5 *(xticklocations[1]-xticklocations[0]), -0.05, "val")
-            plt.text(xticklocations[1]+0.5 *(xticklocations[2]-xticklocations[1]), -0.05, "test")
+            plt.text(0.5 *xticklocations[0], -0.1, "train")
+            plt.text(xticklocations[0]+0.5 *(xticklocations[1]-xticklocations[0]), -0.1, "val")
+            plt.text(xticklocations[1]+0.5 *(xticklocations[2]-xticklocations[1]), -0.1, "test")
+        
         plt.xticks(xticklocations, xticklabels)
 
     else:
         plt.xticks(range(len(filename_indices)), filename_indices)
-    plt.show()
-    fig = plt.gcf()
+    fig = plt.gcf()   
     os.makedirs("figures", exist_ok=True)
-    fig.savefig(os.path.join("figures",title+".pdf"))
+    fig.savefig(os.path.join("figures",title+".png"))
+    plt.show()
     plt.clf()
 
 
@@ -423,6 +436,11 @@ if __name__=="__main__":
     
     #plot_features(tissue_data)
     
+    create_gt_pp()
     
-    #plot_results_from_file("results_rf/rfc_all_test0/eval.dict", title="Evaluation for RF model with All Features")
+    ##plot_evaluation_results_from_file("results_rf/rfc_new/predictions_train_1_0/eval.dict", title="Evaluation for RF model only based on RGB")
+    #plot_evaluation_results_from_file("results_rf/rfc_new/predictions_train_1_0/eval_pp.dict", title="Evaluation for RF model only based on RGB after pp")
+
+    #plot_evaluation_results_from_file("results_NN/test_train_0_1_NoColorAug/predictions_split0_1/eval.dict", title="Evaluation for ft-CNN model")
+    #plot_evaluation_results_from_file("results_NN/test_train_0_1_NoColorAug/predictions_split0_1/eval_pp.dict", title="Evaluation for ft-CNN model after pp")
     #plot_results_from_file(("results_rf/rfc_onlyRGB_test0/eval.dict", title="Evaluation for RF model without additional Features")
