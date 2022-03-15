@@ -1,0 +1,7 @@
+__pycache__/
+data/mask\ binary/
+data/tissue_images/
+figures/
+results_rf/
+results_NN/
+models/
