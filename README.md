@@ -8,6 +8,11 @@ Two approaches were developed.
 1. Convolutional Neural Network
 2. Random Forest Pixel Classifier
 
+### Issues
+ - fine-tuned model file is ~138MB large which is not permitted in github,
+   Download link will be provided
+ - GPU support not tested
+
 ## Getting Started
 
 git clone https://github.com/melaniedohmen/data_science_task
@@ -18,10 +23,11 @@ Unpack data/data.zip into data/
 conda env create -f environment.yml
 conda activate data_science_task
 ```
-Download fine-tuned CNN model from [TODO: Model is ~138MB large which is not permitted in github]
+Download fine-tuned CNN model 
 and unpack into models/
 
 Then run
+
 ```
 python segment.py
 ```
@@ -32,7 +38,7 @@ By default runs prediction on fine-tuned CNN model
 ```
  # call test routine for CNN model
  # evaluation metrics are returned as dictionaries
- eval_dict_ftNN`, eval_dict_pp_ftNN = test(CNN_test_params)
+ eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
  
  # plot evaluation metrics for unprocessed predictions:
  plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
