@@ -157,6 +157,10 @@ def test(params):
                         prediction = separate_touching_nuclei(prediction)
                         gt_mask = separate_touching_nuclei(gt_mask)
                     
+                    # save prediction images after post-processing
+                    pred_PIL = Image.fromarray(prediction)
+                    pred_PIL.save(os.path.join(outdir, "pp_"+filename_prefixes[subset][i]+".png"))
+
                     # calculate metrics after post-processing:
                     append_evaluation(prediction, gt_mask, eval_dict_pp)
                 

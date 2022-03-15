@@ -376,8 +376,8 @@ def plot_evaluation_results(eval_dict, title, filename_indices = None):
             xticklocations = [xticklocations[x] for x in range(len(eval_dict["Accuracy"])) if np.isnan(eval_dict["Accuracy"][x])]
             xticklabels = ["" for x in xticklocations]
             plt.text(0.5 *xticklocations[0], -0.05, "train")
-            plt.text(xticklocations[0]+0.5 *(xticklocations[1]-xticklocations[0]), -0.3, "val")
-            plt.text(xticklocations[1]+0.5 *(xticklocations[2]-xticklocations[1]), -0.3, "test")
+            plt.text(xticklocations[0]+0.5 *(xticklocations[1]-xticklocations[0]), -0.05, "val")
+            plt.text(xticklocations[1]+0.5 *(xticklocations[2]-xticklocations[1]), -0.05, "test")
         plt.xticks(xticklocations, xticklabels)
 
     else:
