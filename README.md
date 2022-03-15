@@ -23,8 +23,11 @@ Unpack data/data.zip into data/
 conda env create -f environment.yml
 conda activate data_science_task
 ```
-Download fine-tuned CNN model 
-and unpack into models/
+Download fine-tuned CNN model here:
+
+https://www.dropbox.com/s/im995cp0gkfyi48/best_test_train_0_1_NoColorAug.zip?dl=0
+
+and unpack into models/best_test_train_0_1_NoColorAug.pytorch
 
 Then run
 
