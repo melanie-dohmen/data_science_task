@@ -32,22 +32,9 @@ Then run
 python segment.py
 ```
 
-By default runs prediction on fine-tuned CNN model
-(parameters documented in `testNN.py`)
 
-```
- # call test routine for CNN model
- # evaluation metrics are returned as dictionaries
- eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
- 
- # plot evaluation metrics for unprocessed predictions:
- plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
- 
- # plot evaluation metrics after post-processing predictions:
- plot_evaluation_results(eval_dict_pp_ftNN, "Evaluation of ft-CNN model after pp")
-```
 
-To train a new CNN with different parameters do:
+To reproduce the CNN training with selected parameters do:
 (parameters documented in `train_NN.py`)
 
 ```
@@ -63,6 +50,21 @@ To train a new CNN with different parameters do:
  # plot results with and without post-processing:
  plot_evaluation_results(eval_dict_NN, "Evaluation of newly trained CNN model")
  plot_evaluation_results(eval_dict_pp_NN, "Evaluation of newly trained CNN model after pp")
+```
+
+To run a prediction on a fine-tuned CNN model:
+(parameters documented in `testNN.py`)
+
+```
+ # call test routine for CNN model
+ # evaluation metrics are returned as dictionaries
+ eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
+ 
+ # plot evaluation metrics for unprocessed predictions:
+ plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
+ 
+ # plot evaluation metrics after post-processing predictions:
+ plot_evaluation_results(eval_dict_pp_ftNN, "Evaluation of ft-CNN model after pp")
 ```
 
 To train a random forest classifier do:

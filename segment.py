@@ -24,8 +24,8 @@ from plot_figures import plot_evaluation_results
 
 
 CNN_train_params = {
-    "experiment_name": "res-net_new",
-    "epochs": 5,
+    "experiment_name": "retrain_resnet50_NoColorAug",
+    "epochs": 200,
     "start_epoch": 0, 
     "resume_model": "",
     "data_path": "data",
@@ -85,32 +85,32 @@ if __name__=="__main__":
     '''
     test the fine-tuned CNN:
     '''
-    # call test routine for CNN model
-    # evaluation metrics are returned as dictionaries
-    eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
+    # # call test routine for CNN model
+    # # evaluation metrics are returned as dictionaries
+    # eval_dict_ftNN, eval_dict_pp_ftNN = test(CNN_test_params)
     
-    # plot evaluation metrics for unprocessed predictions:
-    plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
+    # # plot evaluation metrics for unprocessed predictions:
+    # plot_evaluation_results(eval_dict_ftNN, "Evaluation of ft-CNN model")
     
-    # plot evaluation metrics after post-processing predictions:
-    plot_evaluation_results(eval_dict_pp_ftNN, "Evaluation of ft-CNN model after pp")
+    # # plot evaluation metrics after post-processing predictions:
+    # plot_evaluation_results(eval_dict_pp_ftNN, "Evaluation of ft-CNN model after pp")
     
     
     '''
     train and test a new CNN model:
     '''
-    # # call train routine for CNN model (see parameters)
-    # train(CNN_train_params)
+    # call train routine for CNN model (see parameters)
+    train(CNN_train_params)
     
-    # # get model name:
-    # CNN_test_params["model_name"] = CNN_train_params["experiment_name"]
+    # get model name:
+    CNN_test_params["model_name"] = CNN_train_params["experiment_name"]
     
-    # # run test routine:
-    # eval_dict_NN, eval_dict_pp_NN = test(CNN_test_params)
+    # run test routine:
+    eval_dict_NN, eval_dict_pp_NN = test(CNN_test_params)
     
-    # # plot results with and without post-processing:
-    # plot_evaluation_results(eval_dict_NN, "Evaluation of newly trained CNN model")
-    # plot_evaluation_results(eval_dict_pp_NN, "Evaluation of newly trained CNN model after pp")
+    # plot results with and without post-processing:
+    plot_evaluation_results(eval_dict_NN, "Evaluation of newly trained CNN model")
+    plot_evaluation_results(eval_dict_pp_NN, "Evaluation of newly trained CNN model after pp")
     
     
     '''
