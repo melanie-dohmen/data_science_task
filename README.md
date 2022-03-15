@@ -18,6 +18,9 @@ Unpack data/data.zip into data/
 conda env create -f environment.yml
 conda activate data_science_task
 ```
+Download fine-tuned CNN model from [TODO: Model is ~138MB large which is not permitted in github]
+and unpack into models/
+
 Then run
 ```
 python segment.py
@@ -88,7 +91,7 @@ There are 10 human tissue types with (samples) available:
 - Thymus (3)
 - ThyroidGland (2)
 
-To ensure best generalabilty, the samples of AdrenalGland (a complete tissue type)
+To ensure best generalizability, the samples of AdrenalGland (a complete tissue type)
  was selected as test set and excluded from training.
 
 By default, Larynx is selected as validation set.
@@ -101,11 +104,11 @@ To better compare models based on the small dataset, a cross-validation approach
 
 The following evaluation metrics were implemented
 
--Accuracy
--Average Precision for IoU threshold 0.5
--Mean Average Precision mAP for IoU thresholds in range(0.5;1.0;0.05)
--Absolute Percentage Error (on cell nuclei counts)
--Intersection over Union 
+- Accuracy
+- Average Precision for IoU threshold 0.5
+- Mean Average Precision mAP for IoU thresholds in range(0.5;1.0;0.05)
+- Absolute Percentage Error (on cell nuclei counts)
+- Intersection over Union 
 
 ## Pre-processing
 
